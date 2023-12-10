@@ -12,11 +12,6 @@
     combos {
         compatible = "zmk,combos";
 
-        lower+space {
-            bindings = <&spotlight>;
-            key-positions = <52 53>;
-        };
-
         jkEsc {
             bindings = <&gresc>;
             key-positions = <31 32>;
@@ -24,43 +19,21 @@
     };
 
     macros {
-        spotlight: spotlight {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings = <&kp LG(SPACE)>;
-            label = "SPOTLIGHT";
-        };
-
-        term: term {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings = <&kp LS(LA(LC(LG(T))))>;
-            label = "TERM";
-        };
     };
 
     behaviors {
-        moAndSpot: moAndSpot {
+        moAndKP: moAndKP {
             compatible = "zmk,behavior-hold-tap";
-            label = "MOANDSPOT";
-            bindings = <&mo>, <&spotlight>;
-
-            #binding-cells = <2>;
-            tapping-term-ms = <120>;
-        };
-
-        moAndTerm: moAndTerm {
-            compatible = "zmk,behavior-hold-tap";
-            label = "MOANDTERM";
+            label = "MOANDKP";
             bindings = <&mo>, <&kp>;
 
             #binding-cells = <2>;
             tapping-term-ms = <120>;
         };
 
-        shiftCaps: shiftCaps {
+        kpAndCaps: kpAndCaps {
             compatible = "zmk,behavior-hold-tap";
-            label = "SHIFTCAPS";
+            label = "KPANDCAPS";
             bindings = <&kp>, <&caps_word>;
 
             #binding-cells = <2>;
@@ -89,11 +62,11 @@
             //                     | ALT  | GUI  | LOWER|  SPACE |  | ENTER | RAISE| BSPC  | GUI   |
 
             bindings = <
-&kp ESC                           &kp N1  &kp N2  &kp N3    &kp N4    &kp N5                                                 &kp N6          &kp N7    &kp N8     &kp N9   &kp N0    &kp GRAVE
-&kp TAB                           &kp Q   &kp W   &kp E     &kp R     &kp T                                                  &kp Y           &kp U     &kp I      &kp O    &kp P     &kp MINUS
-&holdOrTapKP LCTRL LG(LS(SPACE))  &kp A   &kp S   &kp D     &kp F     &kp G                                                  &kp H           &kp J     &kp K      &kp L    &kp SEMI  &kp SQT
-&shiftCaps LSHFT 0                &kp Z   &kp X   &kp C     &kp V     &kp B                           &kp LBKT     &kp RBKT  &kp N           &kp M     &kp COMMA  &kp DOT  &kp FSLH  &shiftCaps RSHFT 0
-                                                  &kp LALT  &kp LGUI  &moAndTerm 1 LS(LA(LC(LG(T))))  &kp SPACE    &kp RET   &moAndSpot 2 0  &kp BSPC  &kp RGUI
+&kp ESC                           &kp N1  &kp N2  &kp N3    &kp N4    &kp N5                                               &kp N6                &kp N7    &kp N8     &kp N9   &kp N0    &kp GRAVE
+&kp TAB                           &kp Q   &kp W   &kp E     &kp R     &kp T                                                &kp Y                 &kp U     &kp I      &kp O    &kp P     &kp MINUS
+&holdOrTapKP LCTRL LG(LS(SPACE))  &kp A   &kp S   &kp D     &kp F     &kp G                                                &kp H                 &kp J     &kp K      &kp L    &kp SEMI  &kp SQT
+&kpAndCaps LSHFT 0                &kp Z   &kp X   &kp C     &kp V     &kp B                         &kp LBKT     &kp RBKT  &kp N                 &kp M     &kp COMMA  &kp DOT  &kp FSLH  &kpAndCaps RSHFT 0
+                                                  &kp LALT  &kp LGUI  &moAndKP 1 LS(LA(LC(LG(T))))  &kp SPACE    &kp RET   &moAndKP 2 LG(SPACE)  &kp BSPC  &kp RGUI
             >;
 
             sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
